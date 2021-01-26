@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, View,Text,TouchableOpacity,} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Screen1 from "./Screen1";
 import { NavigationContainer, StackActions } from '@react-navigation/native';
+
+import Screen1 from './Screen1';
+
 
 
 function _onPress() {
@@ -28,7 +30,7 @@ function HomeScreen({navigation}){
         </TouchableOpacity>
         </View>
         <View style={{width:'50%',height:'50%',backgroundColor:'yellow'}}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Details')}>
+        <TouchableOpacity onPress={()=> navigation.navigate('Screen1')}>
           <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
             <Text>버튼클릭2</Text>
           </View>
@@ -50,8 +52,9 @@ class App extends React.Component {
 render(){
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen}/>
+      <Stack.Navigator initialRouteName="Start" headerMode="null">
+        <Stack.Screen name="Start" component={HomeScreen}/>
+        <Stack.Screen name="Screen1" component={Screen1}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
