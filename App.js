@@ -1,73 +1,27 @@
-import React, { Component } from 'react';
-import {StyleSheet, View,Text,TouchableOpacity,} from 'react-native';
+// In App.js in a new project
+
+import * as React from 'react';
+import { View, Text,Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
 
-import Screen1 from './Screen1';
+import First from './First';
+import Second from './Second';
+import HomeScreen from './HomeScreen';
 
 
-
-function _onPress() {
-  console.log("버튼클릭을 눌렀을때");
-}
-
-function _onPress2({navigation}){
-//  console.log("버튼클리2를 눌렀을때")
-    navigation.navigate('Screen1');
-}
-function HomeScreen({navigation}){
-  return(
-    <View style={{flex:1}}>
-      <View style={{height:'10%'}}>
-        <Text style={{fontSize:50, textAlign:'center'}}>Start</Text>
-      </View>
-      <View style={{flexDirection:'row',height:'30%',backgroundColor: 'green'}}>
-        <View style={{width:'50%',height:'50%',backgroundColor:'red'}}>
-        <TouchableOpacity onPress={()=> _onPress()}>
-        <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
-            <Text>버튼클릭</Text>
-          </View>
-        </TouchableOpacity>
-        </View>
-        <View style={{width:'50%',height:'50%',backgroundColor:'yellow'}}>
-        <TouchableOpacity onPress={()=> navigation.navigate('Screen1')}>
-          <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
-            <Text>버튼클릭2</Text>
-          </View>
-        </TouchableOpacity>
-        </View>
-      </View>
-      <View style={{height:'60%',backgroundColor:'blue'}}/>
-    </View>
-  );
-}
-/*function DetailsScreen({navigation}) {
-  return (
-  
-  );
-}*/
 const Stack = createStackNavigator();
-class App extends React.Component {
 
-render(){
+function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Start" headerMode="null">
-        <Stack.Screen name="Start" component={HomeScreen}/>
-        <Stack.Screen name="Screen1" component={Screen1}/>
+      <Stack.Navigator initialRouteName="Details" headerMode="null">
+        <Stack.Screen name="Home" component={HomeScreen}/>
+        <Stack.Screen name="Details" component={First} />
+        <Stack.Screen name="Seconds" component={Second}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-};
-
-const styles = StyleSheet.create({
-  ButtonClick:{
-    
-  },
-  Button: {
-    backgroundColor: '#00ff00',
-  },
-});
 
 export default App;
