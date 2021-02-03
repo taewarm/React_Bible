@@ -1,56 +1,100 @@
-import React, { Component } from 'react';
-import {StyleSheet, View,Text,TouchableOpacity,} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer, StackActions } from '@react-navigation/native';
+import React, { Component } from "react";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from "react-native";
 
-import Screen2 from './Screen2';
+class Screen1 extends Component {
+  state = {
+    modalVisible: false
+  };
 
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
 
+  render() {
+    const { modalVisible } = this.state;
+    return (
+      <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Hello World!</Text>
 
-function _onPress(navigation) {
-    //navigation.navigate('Screen2');
-    console.log(props);
-}
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
 
-function Home(){
-    
-}
-/*function DetailsScreen({navigation}) {
-  return (
-  
-  );
-}*/
-const Stack = createStackNavigator();
-class App extends React.Component {
-
-render(){
-  return (
-    <View style={{flex:1}}>
-    <View style={{height:'10%'}}>
-      <Text style={{fontSize:50, textAlign:'center'}}>Start</Text>
-    </View>
-    <View style={{flexDirection:'row',height:'30%',backgroundColor: 'green'}}>
-      <View style={{width:'50%',height:'50%',backgroundColor:'red'}}>
-      <TouchableOpacity onPress={()=> _onPress()}>
-      <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
-          <Text>버튼클릭</Text>
-        </View>
-      </TouchableOpacity>
+        <TouchableHighlight
+          style={styles.openButton}
+          onPress={() => {
+            this.setModalVisible(true);
+          }}
+        >
+          <Text style={styles.textStyle}>Show Modal</Text>
+        </TouchableHighlight>
       </View>
-    </View>
-    <View style={{height:'60%',backgroundColor:'blue'}}/>
-  </View>
-  );
-};
-};
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  ButtonClick:{
-    
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
   },
-  Button: {
-    backgroundColor: '#00ff00',
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
   },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });
 
-export default App;
+export default Screen1;

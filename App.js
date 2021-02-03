@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import First from './First';
 import Second from './Second';
 import HomeScreen from './HomeScreen';
+import Screen1 from './Screen1';
 
 
 const Stack = createStackNavigator();
@@ -23,6 +24,7 @@ class App extends Component{
             <Stack.Screen name="Home" component={HomeScreen}/>
             <Stack.Screen name="First" component={First} />
             <Stack.Screen name="Seconds" component={Second}/>
+            <Stack.Screen name="Screen1" component={Screen1}/>
           </Stack.Navigator>
         </NavigationContainer>
           );

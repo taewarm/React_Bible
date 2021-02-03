@@ -9,7 +9,8 @@
     }
     
     function _onPress1({navigation}) {
-      {navigation.navigate('First');}
+      //{navigation.navigate('First');}
+      {navigation.navigate('Screen1');}
         //console.log(aaa);
     }
 

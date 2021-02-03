@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
-import {StyleSheet,View, Text,TextInput, TouchableOpacity,Image, Alert} from 'react-native';
+import {StyleSheet,View, Text,TextInput, TouchableOpacity, Alert,Modal,TouchableHighlight} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 class Second extends Component {
     state={
         count:0,
         value:'',
         text:'',
-      }
+        size:15,
+      };
     render() {
         return (
             <View style={{flex:1}}>
@@ -18,19 +20,32 @@ class Second extends Component {
                         <View>
                             <TextInput style={styles.input} onChangeText={(text) => this.setState({value:text})}/>
                         </View>
-                        <TouchableOpacity onPress={this.printbible.bind(this)}>
+                        <TouchableOpacity onPress={this.fetchData.bind(this)}>
                         <View style={{width:50,height:50,alignItems:'center',justifyContent:'center',marginLeft:10,backgroundColor:'red'}}>
                                 <Text>검색</Text>
+                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.fontsizeP.bind(this)}>
+                        <View style={{width:50,height:50,alignItems:'center',justifyContent:'center',marginLeft:10,backgroundColor:'#202856'}}>
+                                <Text style={{color:'white'}}>+</Text>
+                        </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={()=>{this.fontsizeM.bind(this);}}>
+                        <View style={{width:50,height:50,alignItems:'center',justifyContent:'center',marginLeft:10,backgroundColor:'#202856'}}>
+                                <Text style={{color:'white'}}>-</Text>
                         </View>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{width:'100%',height:'90%'}}>
-                        <Text>{this.state.text}</Text>
-                    </View>
+                    <ScrollView>
+                        <Text style={{fontSize:this.state.size}}>{this.state.text}</Text>
+                    </ScrollView>
+                </View>
             </View>
         );
     }
+
     printbible = function(){
         let bible = this.state.value;
         this.setState({text:bible});
@@ -39,8 +54,46 @@ class Second extends Component {
         let inpp = this.state.value;
         Alert.alert('오류',inpp+"장은 없습니다.");
     }
-}
 
+    fontsizeP = function(){
+        if(this.state.size == 25){
+            Alert.alert('오류','더이상 글자를 늘릴 수 없습니다.');
+        }else{
+            this.state.size += 1;
+            this.setState({size:this.state.size});
+        }
+        
+    }
+
+    fontsizeM = function(){
+        if(this.state.size == 10){
+            Alert.alert('오류','더이상 글자를 줄일 수 없습니다.');
+        }else{
+            this.state.size -= 1;
+        this.setState({size:this.state.size});
+        }
+    }
+
+    fetchData=()=>{
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = (e) =>{
+          if(request.readyState !== 4){
+            return;
+          }
+          if(request.status ===200){
+            console.log('success',request.responseText);
+            //여기서 값 옮겨서 화면단에다가 출력할수있는방안찾기
+            this.setState({
+              text: request.responseText
+            })
+          }else{
+            console.warn('error');
+          }
+        };
+        request.open('GET','https://innovation.kfsco.com:1750/PRHwz6V8nHDCklqx2FTUqzOL4af0yBxA7Eu6bIHHgNvcNrOLLCw7WXZgTXo9IjSVxMyRvrMLT4saTsqGUrQmhZpo8Jj1CDu6yNfC=KFS');
+        request.send();
+    }
+}
 export default Second;
 
 const styles = StyleSheet.create({
