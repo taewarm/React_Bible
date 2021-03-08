@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet,View, Text,TextInput, TouchableOpacity,Image, Alert} from 'react-native';
+import {StyleSheet,View, Text,TextInput, TouchableOpacity,Image, Alert, KeyboardAvoidingView} from 'react-native';
 
 class First extends Component {
     state={
@@ -26,8 +26,8 @@ class First extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{width:'100%',height:'90%'}}>
-                        <Image style={{width:'100%',height:'100%',resizeMode:'cover'}} source={this.state.img}/>
+                    <View style={{width:'100%',height:'90%'}}>
+                        <Image style={{width:'100%',height:'100%',resizeMode:'contain'}} source={this.state.img}/>
                     </View>
             </View>
         );
@@ -36,10 +36,19 @@ class First extends Component {
         let count = this.state.value;
         switch(count){
             case '1':
-                this.setState({img:require('./image/kakaotalk.png')});
+                this.setState({img:require('./image/1.jpg')});
                 break;
             case '2':
-                this.setState({img:require('./image/killerwhale.jpg')});
+                this.setState({img:require('./image/2.jpg')});
+                break;
+            case '3':
+                this.setState({img:require('./image/3.jpg')});
+                break;
+            case '4':
+                this.setState({img:require('./image/4.jpg')});
+                break;
+            case '5':
+                this.setState({img:require('./image/5.jpg')});
                 break;
             default:
                 this.search();

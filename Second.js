@@ -30,7 +30,8 @@ class Second extends Component {
                                 <Text style={{color:'white'}}>+</Text>
                         </View>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={()=>{this.fontsizeM.bind(this);}}>
+                        {/* <TouchableOpacity onPress={()=>{this.fontsizeM.bind(this)}}> */}
+                        <TouchableOpacity onPress={this.fontsizeM.bind(this)}>
                         <View style={{width:50,height:50,alignItems:'center',justifyContent:'center',marginLeft:10,backgroundColor:'#202856'}}>
                                 <Text style={{color:'white'}}>-</Text>
                         </View>
@@ -47,8 +48,9 @@ class Second extends Component {
     }
 
     printbible = function(){
-        let bible = this.state.value;
-        this.setState({text:bible});
+        // let bible = this.state.value;
+        // this.setState({text:bible});
+        // alert(bible);
     }
     search = function(){
         let inpp = this.state.value;
@@ -76,21 +78,31 @@ class Second extends Component {
 
     fetchData=()=>{
         var request = new XMLHttpRequest();
+        let bible = this.state.value;
         request.onreadystatechange = (e) =>{
           if(request.readyState !== 4){
             return;
           }
           if(request.status ===200){
             console.log('success',request.responseText);
-            //여기서 값 옮겨서 화면단에다가 출력할수있는방안찾기
-            this.setState({
-              text: request.responseText
-            })
+            console.log('check',request.responseText.length);
+            if(request.responseText.length == 2 || request.responseText.length==184){
+                this.setState({
+                    bible:this.state.value
+                })
+                Alert.alert('오류',bible+'쪽은 값이 없습니다.');
+            }else{
+                //여기서 값 옮겨서 화면단에다가 출력할수있는방안찾기
+                this.setState({
+                    text: request.responseText
+                })
+            }
+            
           }else{
             console.warn('error');
           }
         };
-        request.open('GET','https://innovation.kfsco.com:1750/PRHwz6V8nHDCklqx2FTUqzOL4af0yBxA7Eu6bIHHgNvcNrOLLCw7WXZgTXo9IjSVxMyRvrMLT4saTsqGUrQmhZpo8Jj1CDu6yNfC=KFS');
+        request.open('GET','https://innovation.kfsco.com:1750/PRHwz6V8nHDCklqx2FTUqzOL4af0yBxA7Eu6bIHHgNvcNrOLLCw7WXZgTXo9IjSVxMyRvrMLT4saTsqGUrQmhZpo8Jj1CDu6yNfC='+bible);
         request.send();
     }
 }
