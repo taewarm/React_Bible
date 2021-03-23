@@ -28,14 +28,14 @@
         <View style={{width:'50%',height:'50%',backgroundColor:'red',marginTop:400,borderRadius:100}}>
         <TouchableOpacity onPress={()=> _onPress({navigation})}>
         <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
-            <Text>버튼클릭</Text>
+            <Text>ㅅㄱ</Text>
           </View>
         </TouchableOpacity>
         </View>
         <View style={{width:'50%',height:'50%',backgroundColor:'yellow',marginTop:400,borderRadius:100}}>
         <TouchableOpacity onPress={()=> _onPress1({navigation})}>
         <View style={{width:'100%',height:'100%',justifyContent: 'center',alignItems: 'center'}}>
-            <Text>버튼클릭1</Text>
+            <Text>ㅊㅇ</Text>
           </View>
         </TouchableOpacity>
         </View>

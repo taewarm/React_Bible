@@ -9,6 +9,7 @@ class Second extends Component {
         text:'',
         size:15,
       };
+      const = values=['asdasd','asd','aa','asddd'];
     render() {
         return (
             <View style={{flex:1}}>
@@ -46,7 +47,14 @@ class Second extends Component {
             </View>
         );
     }
-
+    fetchData = () => {
+        fetch('http://13.124.172.29:1750/tae')
+        .then(res => res.json())
+        .then(res => {
+            console.log(res[0].contents);//컬럼값 가져오는법
+        })
+    }
+    
     printbible = function(){
         // let bible = this.state.value;
         // this.setState({text:bible});
@@ -76,35 +84,35 @@ class Second extends Component {
         }
     }
 
-    fetchData=()=>{
-        var request = new XMLHttpRequest();
-        let bible = this.state.value;
-        request.onreadystatechange = (e) =>{
-          if(request.readyState !== 4){
-            return;
-          }
-          if(request.status ===200){
-            console.log('success',request.responseText);
-            console.log('check',request.responseText.length);
-            if(request.responseText.length == 2 || request.responseText.length==184){
-                this.setState({
-                    bible:this.state.value
-                })
-                Alert.alert('오류',bible+'쪽은 값이 없습니다.');
-            }else{
-                //여기서 값 옮겨서 화면단에다가 출력할수있는방안찾기
-                this.setState({
-                    text: request.responseText
-                })
-            }
+    // fetchData=()=>{
+    //     var request = new XMLHttpRequest();
+    //     let bible = this.state.value;
+    //     request.onreadystatechange = (e) =>{
+    //       if(request.readyState !== 4){
+    //         return;
+    //       }
+    //       if(request.status ===200){
+    //         console.log('success',request.responseText);
+    //         console.log('check',request.responseText.length);
+    //         if(request.responseText.length == 2 || request.responseText.length==184){
+    //             this.setState({
+    //                 bible:this.state.value
+    //             })
+    //             Alert.alert('오류',bible+'쪽은 값이 없습니다.');
+    //         }else{
+    //             //여기서 값 옮겨서 화면단에다가 출력할수있는방안찾기
+    //             this.setState({
+    //                 text: request.responseText
+    //             })
+    //         }
             
-          }else{
-            console.warn('error');
-          }
-        };
-        request.open('GET','http://13.124.172.29:1750/tae'+bible);
-        request.send();
-    }
+    //       }else{
+    //         console.warn('error');
+    //       }
+    //     };
+    //     request.open('GET','http://13.124.172.29:1750/tae');
+    //     request.send();
+    // }
 }
 export default Second;
 
