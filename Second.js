@@ -102,7 +102,7 @@ class Second extends Component {
             console.warn('error');
           }
         };
-        request.open('GET','https://innovation.kfsco.com:1750/PRHwz6V8nHDCklqx2FTUqzOL4af0yBxA7Eu6bIHHgNvcNrOLLCw7WXZgTXo9IjSVxMyRvrMLT4saTsqGUrQmhZpo8Jj1CDu6yNfC='+bible);
+        request.open('GET','http://13.124.172.29:1750/tae'+bible);
         request.send();
     }
 }
