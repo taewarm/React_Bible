@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet,View, Text,TextInput, TouchableOpacity, Alert,Modal,TouchableHighlight} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import key from './key.js';
 
 class Second extends Component {
     state={
@@ -48,7 +49,8 @@ class Second extends Component {
         );
     }
     fetchData = () => {
-        fetch('http://13.124.172.29:1750/tae')
+        console.log(key.API_URL);
+        fetch(key.API_URL+'/tae')
         .then(res => res.json())
         .then(res => {
             console.log(res[0].contents);//컬럼값 가져오는법
